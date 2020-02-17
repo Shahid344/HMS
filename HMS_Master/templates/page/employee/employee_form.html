@@ -1,0 +1,132 @@
+{% extends 'header/master_header.html' %}
+{% block title %}Employee Master{% endblock %}
+
+
+
+{% block body %}
+<a class="btn btn-primary" href="{% url 'hms_master:employee-detail' %}">Edit</a>
+
+<form method="post" enctype="multipart/form-data" >
+        {% csrf_token %}
+    <div class="container">
+        <br>
+        <div class="form-row">
+            <div class="form-group col-md-5"></div>
+            <div class="form-group col-md-7"><h3>Employee Master</h3></div>
+
+        </div><br>
+
+        <div class="form-row">
+            <div class="form-group col-md-2"></div>
+            <div class="form-group col-md-10"><h5>Employee</h5></div>
+        </div>
+
+        <div class="form-row ">
+
+            <div class="form-group col-md-2"></div>
+
+            <div class="form-group col-md-4">
+                <label class="col-form-label required">Name</label>
+                {{ form.emp_name}}
+
+                {% for error in form.emp_name.errors %}
+                <p style="color:red;"><strong>Error! </strong>{{ error }}</p>
+                {% endfor %}
+
+            </div>
+
+            <div class="form-group col-md-4">
+
+                <label class="col-form-label required">Pan Number</label>
+                {{form.emp_pan_no}}
+
+                {% for error in form.emp_pan_no.errors %}
+                    <p style="color:red;"><strong>Error! </strong>{{ error }}</p>
+                {% endfor %}
+
+            </div>
+            <div class="form-group col-md-2"></div>
+
+        </div>
+
+        <div class="form-row ">
+
+            <div class="form-group col-md-2"></div>
+
+            <div class="form-group col-md-4">
+
+                <label class="col-form-label required">Age</label>
+                {{form.emp_age}}
+                {% for error in form.emp_age.errors %}
+                    <p style="color:red;"><strong>Error! </strong>{{ error }}</p>
+                {% endfor %}
+
+            </div>
+
+            <div class="form-group col-md-4">
+                <label class="col-form-label required">Gender</label>
+                {{form.emp_gender}}
+            </div>
+            <div class="form-group col-md-2"></div>
+
+        </div>
+
+
+        <div class="form-row ">
+            <div class="form-group col-md-2"></div>
+
+            <div class="form-group col-md-8">
+                <label class="col-form-label required">Email</label>
+                {{ form.emp_email}}
+
+                {% for error in form.emp_email.errors %}
+                    <p style="color:red;"><strong>Error! </strong>{{ error }}</p>
+                {% endfor %}
+            </div>
+            <div class="form-group col-md-2"></div>
+
+        </div>
+
+        <div class="form-row ">
+            <div class="form-group col-md-2"></div>
+
+            <div class="form-group col-md-4">
+                <label class="col-form-label required">City</label>
+                {{ form.emp_city}}
+            </div>
+            <div class="form-group col-md-6"></div>
+
+        </div>
+
+        <br>
+
+        <div class="form-row">
+            <div class="form-group col-md-2"></div>
+            <div class="form-group col-md-3">
+                <button type="submit" class="btn btn-primary">Save</button>
+                <button class="btn btn-primary" type="reset">Clear</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script>
+    $("#id_country").change(function () {
+      var url = $("#cityForm").attr("data-states-url");  // get the url of the `load_cities` view
+      var countryId = $(this).val();  // get the selected country ID from the HTML input
+
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        data: {
+          'country': countryId       // add the country id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_cities` view function
+          $("#id_state").html(data);  // replace the contents of the city input with the data that came from the server
+        }
+      });
+
+    });
+  </script>
+
+{% endblock %}

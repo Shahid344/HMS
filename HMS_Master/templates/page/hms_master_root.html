@@ -1,0 +1,14 @@
+{% extends 'header/master_header.html' %}
+{% block title %}Master Page{% endblock %}
+{% load static %}
+
+{% if messages %}
+{% for message in messages %}
+{{message}}
+{% endfor %}
+{% endif %}
+{% block body %}
+
+
+<br><br>
+{% endblock %}

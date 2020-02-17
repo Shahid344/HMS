@@ -1,0 +1,48 @@
+{% extends 'header/master_header.html' %}
+{% block title %}Employee Master{% endblock %}
+{% block body %}
+
+<div class="container">
+{%if all_employee%}
+    <br>
+    <h3>All Employee List</h3>
+    <a class="btn btn-primary" href="{% url 'hms_master:employee-add' %}">Employee Form</a><br><br>
+        <table class="table table-striped table-bordered table-sm">
+        <thead class="thead-dark">
+            <tr>
+                <th>S No.</th>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Age</th>
+                <th>Pan</th>
+                <th>City</th>
+                <th>Email</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in all_employee %}
+            <tr>
+                <td>{{ forloop.counter }}&nbsp;</td>
+                <td>{{ item.emp_name }}&nbsp;</td>
+                <td>{{ item.emp_gender }}&nbsp;</td>
+                <td>{{ item.emp_age }}&nbsp;</td>
+                <td>{{ item.emp_pan_no }}&nbsp;</td>
+                <td>{{ item.emp_city }}&nbsp;</td>
+                <td>{{ item.emp_email }}&nbsp;</td>
+                <td><a href="{% url 'hms_master:employee-update' item.id %}" ><i class="fas fa-edit"></i>Edit</a></td>
+                <td><a href="{% url 'hms_master:employee-delete' item.id %}" ><i class="fas fa-trash"></i>Delete</a></td>
+
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {%else%}
+        <h3>You Don't have any Employee Details</h3>
+    {%endif%}
+
+</div>
+
+
+{% endblock %}
